@@ -151,6 +151,10 @@ public class Town {
     }
 
     public void digForGold() {
-        if*
+        if (hunter.hasItemInKit("shovel")) {
+            int fiftyPercent = (int) (Math.random() * 2) + 1;
+        } else {
+            printMessage = "You can't dig for gold without a shovel!";
+        }
     }
 }
