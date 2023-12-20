@@ -149,4 +149,8 @@ public class Town {
         double rand = Math.random();
         return (rand < 0.5);
     }
+
+    public void digForGold() {
+        if*
+    }
 }
