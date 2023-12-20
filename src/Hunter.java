@@ -35,7 +35,8 @@ public class Hunter {
     public void changeGold(int modifier) {
         gold += modifier;
         if (gold < 0) {
-            gold = 0;
+            System.out.println(Colors.RED + "You ran out of " + Colors.RESET + Colors.YELLOW + "gold! " + Colors.RESET + Colors.RED + "Game over!");
+            System.exit(0);
         }
     }
 
