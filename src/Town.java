@@ -150,21 +150,25 @@ public class Town {
         return (rand < 0.5);
     }
 
-    public void digForGold(boolean dugOnce) {
+    public boolean digForGold(boolean dugOnce) {
         if (!dugOnce) {
             if (hunter.hasItemInKit("shovel")) {
                 int fiftyPercent = (int) (Math.random() * 2) + 1;
                 if (fiftyPercent == 1) {
                     int gold = (int) (Math.random() * 20) + 1;
-                    printMessage =
+                    printMessage = "You dug up " + gold + " gold!";
+                    return true;
                 } else {
                     printMessage = "You dug but only found dirt!";
+                    return true;
                 }
             } else {
                 printMessage = "You can't dig for gold without a shovel!";
+                return false;
             }
         } else {
             printMessage = "You already dug for gold in this town.";
+            return false;
         }
     }
 }

@@ -16,6 +16,7 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private boolean dugOnce;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -25,6 +26,7 @@ public class TreasureHunter {
         currentTown = null;
         hunter = null;
         hardMode = false;
+        dugOnce = false;
     }
 
     /**
@@ -138,7 +140,14 @@ public class TreasureHunter {
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
         } else if (choice.equals("d")) {
-            currentTown.digForGold(false);
+            if (dugOnce) {
+                boolean success = currentTown.digForGold(true);
+                if (success) {
+                    dugOnce = true;
+                }
+            } else {
+                currentTown.digForGold(false);
+            }
         }
         else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
