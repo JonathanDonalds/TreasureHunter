@@ -138,7 +138,7 @@ public class TreasureHunter {
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
         } else if (choice.equals("d")) {
-            currentTown.digForGold();
+            currentTown.digForGold(false);
         }
         else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
