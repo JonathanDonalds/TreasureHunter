@@ -140,13 +140,13 @@ public class TreasureHunter {
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
         } else if (choice.equals("d")) {
-            if (dugOnce) {
-                boolean success = currentTown.digForGold(true);
+            if (!dugOnce) {
+                boolean success = currentTown.digForGold(false);
                 if (success) {
                     dugOnce = true;
                 }
             } else {
-                currentTown.digForGold(false);
+                currentTown.digForGold(true);
             }
         }
         else if (choice.equals("x")) {

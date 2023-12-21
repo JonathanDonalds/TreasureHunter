@@ -157,6 +157,7 @@ public class Town {
                 if (fiftyPercent == 1) {
                     int gold = (int) (Math.random() * 20) + 1;
                     printMessage = "You dug up " + gold + " gold!";
+                    hunter.changeGold(gold);
                     return true;
                 } else {
                     printMessage = "You dug but only found dirt!";
