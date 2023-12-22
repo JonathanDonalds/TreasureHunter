@@ -134,7 +134,6 @@ public class Hunter {
     public boolean hasTreasure(String item) {
         for (String tmpItem : treasure) {
             if (item.equals(tmpItem)) {
-                // early return
                 return true;
             }
         }
@@ -163,13 +162,12 @@ public class Hunter {
 
     public String getTreasureList() {
         String printableList = "";
-        String space = " ";
         if (treasureListIsEmpty()) {
             printableList += "none";
         }
         for (String item : treasure) {
             if (item != null) {
-                printableList += Colors.GREEN + "A " + item + Colors.RESET + space;
+                printableList += Colors.GREEN + "a " + item + Colors.RESET + " ";
             }
         }
 
@@ -183,7 +181,8 @@ public class Hunter {
         String str = hunterName + " has " + Colors.YELLOW + gold + Colors.RESET + " gold";
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
-        } else if (!treasureListIsEmpty()) {
+        }
+        if (!treasureListIsEmpty()) {
             str += "\nTreasures found: " + getTreasureList();
         }
         return str;
