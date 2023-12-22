@@ -11,6 +11,8 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private String treasure;
+    private boolean searchedTown;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -21,6 +23,7 @@ public class Town {
     public Town(Shop shop, double toughness) {
         this.shop = shop;
         this.terrain = getNewTerrain();
+        this.treasure = getTreasure();
 
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
@@ -30,6 +33,8 @@ public class Town {
 
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
+
+
     }
 
     public String getLatestNews() {
@@ -170,6 +175,37 @@ public class Town {
         } else {
             printMessage = "You already dug for gold in this town.";
             return false;
+        }
+    }
+
+    public String getTreasure() {
+        double rnd = Math.random();
+        if (rnd < .25) {
+            return "crown";
+        } else if (rnd < .5) {
+            return "trophy";
+        } else if (rnd < .75) {
+            return "gem";
+        } else {
+            return "dust";
+        }
+    }
+
+    public void huntForTreasure() {
+        if (searchedTown) {
+            System.out.println("You have already searched this town.");
+        } else {
+            if (treasure.equals("dust")) {
+                System.out.println("You found dust");
+            } else {
+                if (hunter.hasTreasure(treasure)) {
+                    System.out.println("You already collected a " + treasure);
+                } else {
+                    System.out.println("You found a " + treasure + "!");
+                    hunter.addTreasure(treasure);
+                }
+                searchedTown = true;
+            }
         }
     }
 }
