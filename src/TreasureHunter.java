@@ -16,6 +16,7 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private boolean easyMode;
     private boolean dugOnce;
 
     /**
@@ -50,11 +51,11 @@ public class TreasureHunter {
         // set hunter instance variable
         hunter = new Hunter(name, 10);
 
-        System.out.print("Hard mode? (y/n): ");
-        String hard = SCANNER.nextLine().toLowerCase();
-        if (hard.equals("y")) {
+        System.out.print("Difficulty (E)asy/(N)ormal/(H)ard: ");
+        String mode = SCANNER.nextLine().toLowerCase();
+        if (mode.equals("h")) {
             hardMode = true;
-        } else if (hard.equals("test")) {
+        } else if (mode.equals("test")) {
             hunter = new Hunter(name, 172);
             hunter.buyItem("water", 2);
             hunter.buyItem("rope", 4);
@@ -63,6 +64,9 @@ public class TreasureHunter {
             hunter.buyItem("boat", 20);
             hunter.buyItem("boots", 20);
             hunter.buyItem("shovel", 8);
+        } else if (mode.equals("e")) {
+            easyMode = true;
+            hunter = new Hunter(name, 20);
         }
     }
 
@@ -78,6 +82,9 @@ public class TreasureHunter {
 
             // and the town is "tougher"
             toughness = 0.75;
+        }  else if (easyMode) {
+            markdown = 1;
+            toughness = 0.99;
         }
 
         // note that we don't need to access the Shop object
@@ -132,11 +139,11 @@ public class TreasureHunter {
         if (choice.equals("b") || choice.equals("s")) {
             currentTown.enterShop(choice);
         } else if (choice.equals("m")) {
-            if (currentTown.leaveTown()) {
-                // This town is going away so print its news ahead of time.
-                System.out.println(currentTown.getLatestNews());
-                enterTown();
-            }
+            if (currentTown.leaveTown(easyMode)) {
+                    // This town is going away so print its news ahead of time.
+                    System.out.println(currentTown.getLatestNews());
+                    enterTown();
+                }
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
         } else if (choice.equals("d")) {
