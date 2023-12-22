@@ -113,6 +113,10 @@ public class TreasureHunter {
         String choice = "";
 
         while (!choice.equals("x")) {
+            if (hunter.hasTreasure("crown") && hunter.hasTreasure("trophy") && hunter.hasTreasure("gem")) {
+                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+                break;
+            }
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
