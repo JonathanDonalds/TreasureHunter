@@ -11,6 +11,7 @@ public class Hunter {
     private int gold;
 
     private String[] treasure;
+    private static boolean samurai;
 
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
@@ -18,16 +19,26 @@ public class Hunter {
      * @param hunterName The hunter's name.
      * @param startingGold The gold the hunter starts with.
      */
-    public Hunter(String hunterName, int startingGold) {
+    public Hunter(String hunterName, int startingGold, boolean samurai) {
         this.hunterName = hunterName;
-        kit = new String[7]; // only 7 possible items can be stored in kit
-        gold = startingGold;
+        if (startingGold == 100) {
+            kit = new String[]{"water", "rope", "machete", "horse", "boat", "boots"};
+        } else if (samurai) {
+            kit = new String[8];
+        } else {
+            kit = new String[6]; // only 5 possible items can be stored in kit
+        }
         treasure = new String[3];
+        gold = startingGold;
+        this.samurai = samurai;
     }
-
     //Accessors
     public String getHunterName() {
         return hunterName;
+    }
+
+    public static boolean getSamurai() {
+        return samurai;
     }
 
     /**
@@ -51,7 +62,7 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
-        if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
+        if ((costOfItem == 0 && !Hunter.getSamurai()) || gold < costOfItem || hasItemInKit(item)) {
             return false;
         }
 
@@ -99,7 +110,7 @@ public class Hunter {
      * @param item The item to be added to the kit.
      * @return true if the item is not in the kit and has been added.
      */
-    private boolean addItem(String item) {
+    public boolean addItem(String item) {
         if (!hasItemInKit(item)) {
             int idx = emptyPositionInKit();
             kit[idx] = item;
